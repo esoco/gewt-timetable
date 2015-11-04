@@ -1,0 +1,71 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'gwt-base'
+
+project.version = "0.9.0"
+
+repositories {
+    jcenter()
+	flatDir { dirs 'lib' }
+}
+
+dependencies 
+{
+	if (project(':gewt').getProjectDir().exists())
+	{
+		compile project(':gewt')
+	}
+	else
+	{
+		compile 'de.esoco:gewt:1.+'
+	}
+		
+	compile name: 'gwt-cal-0.9.4'		
+	compile name: 'gwt-dnd-3.3.4'		
+    testCompile 'junit:junit:4.+'
+}
+
+
+// disabled Java 8 doclint for Javadoc
+if (JavaVersion.current().isJava8Compatible()) {
+	allprojects	{
+		tasks.withType(Javadoc) {
+        	options.addStringOption('Xdoclint:none', '-quiet')
+		}
+	}
+}
+
+gwt {
+    gwtVersion='2.7.0'
+    modules 'de.esoco.GEWTTimetable'
+}
+
+jar { from sourceSets.main.allJava }
+
+task binaryJar(type: Jar, dependsOn: classes) {
+    classifier = 'bin'
+    from sourceSets.main.output
+}
+
+task sourceJar(type: Jar, dependsOn: classes) {
+    classifier = 'src'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'doc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives binaryJar
+    archives sourceJar
+}

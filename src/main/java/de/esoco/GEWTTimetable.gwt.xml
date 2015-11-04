@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 1.6.4//EN" "http://google-web-toolkit.googlecode.com/svn/tags/1.6.4/distro-source/core/src/gwt-module.dtd">
+<module>
+
+	<source path='ewt'/>
+
+	<inherits name='de.esoco.GEWT' />	
+	<inherits name='com.allen_sauer.gwt.dnd.gwt-dnd'/>
+	<inherits name='com.bradrydzewski.gwt.calendar.Calendar' />
+	<inherits name='com.bradrydzewski.gwt.calendar.theme.google.Google' />
+			
+</module>
