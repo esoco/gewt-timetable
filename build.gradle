@@ -48,7 +48,7 @@ gwt {
     modules 'de.esoco.GewtTimetable'
 }
 
-jar { from sourceSets.main.allJava }
+jar { from sourceSets.main.allSource }
 
 task binaryJar(type: Jar, dependsOn: classes) {
     classifier = 'bin'
