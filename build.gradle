@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'gwt-base'
 
-project.version = "0.9.0"
+project.version = "1.0.0"
 
 repositories {
     jcenter()
