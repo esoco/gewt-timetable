@@ -43,10 +43,6 @@ if (JavaVersion.current().isJava8Compatible()) {
 	}
 }
 
-eclipse {
-    pathVariables '': file(getProjectDir())
-}
-
 gwt {
     gwtVersion='2.7.0'
     modules 'de.esoco.GewtTimetable'
