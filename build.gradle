@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'gwt-base'
+apply plugin: 'osgi'
 
 project.version = "1.0.0"
 
