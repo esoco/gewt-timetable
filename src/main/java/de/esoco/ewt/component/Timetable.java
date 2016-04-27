@@ -89,7 +89,7 @@ public class Timetable extends Component implements DateAttribute
 
 	static
 	{
-		EWT.registerComponentWidgetFactory(Timetable.class,
+		EWT.registerWidgetFactory(Timetable.class,
 										   new TimetableWidgetFactory(),
 										   false);
 	}
