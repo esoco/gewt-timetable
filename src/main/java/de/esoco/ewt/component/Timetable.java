@@ -428,7 +428,7 @@ public class Timetable extends Component implements DateAttribute
 		 */
 		@Override
 		public Widget createWidget(
-			UserInterfaceContext rContext,
+			Component rComponent,
 			StyleData			 rStyle)
 		{
 			return new TimetableWidget();
