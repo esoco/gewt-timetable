@@ -1,6 +1,6 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // This file is a part of the 'gewt-timetable' project.
-// Copyright 2015 Elmar Sonnenschein, esoco GmbH, Flensburg, Germany
+// Copyright 2016 Elmar Sonnenschein, esoco GmbH, Flensburg, Germany
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,10 @@
 package de.esoco.ewt.component;
 
 import de.esoco.ewt.EWT;
+import de.esoco.ewt.UserInterfaceContext;
 import de.esoco.ewt.event.EventType;
+import de.esoco.ewt.impl.gwt.WidgetFactory;
+import de.esoco.ewt.style.StyleData;
 
 import de.esoco.lib.property.DateAttribute;
 import de.esoco.lib.property.HasProperties;
@@ -82,33 +85,13 @@ public class Timetable extends Component implements DateAttribute
 	 */
 	public enum TimetableStyle { DAY, MONTH, AGENDA }
 
-	//~ Constructors -----------------------------------------------------------
+	//~ Static fields/initializers ---------------------------------------------
 
-	/***************************************
-	 * Creates a new instance.
-	 */
-	public Timetable()
+	static
 	{
-		super(new TimetableWidget());
-
-		final TimetableWidget rWidget   = getTimetableWidget();
-		CalendarSettings	  rSettings = rWidget.getSettings();
-
-		CalendarFormat.INSTANCE.setFirstDayOfWeek(1);
-		CalendarFormat.INSTANCE.setAm("");
-		CalendarFormat.INSTANCE.setPm("");
-		rSettings.setShowWeekNumbers(true);
-		rSettings.setTimeBlockClickNumber(Click.Double);
-		rWidget.setSettings(rSettings);
-		rWidget.addDateRequestHandler(new DateRequestHandler<Date>()
-			{
-				@Override
-				public void onDateRequested(DateRequestEvent<Date> rEvent)
-				{
-					rWidget.setView(CalendarViews.DAY, 1);
-					rWidget.setDate(rEvent.getTarget());
-				}
-			});
+		EWT.registerWidgetFactory(Timetable.class,
+										   new TimetableWidgetFactory(),
+										   false);
 	}
 
 	//~ Methods ----------------------------------------------------------------
@@ -209,6 +192,34 @@ public class Timetable extends Component implements DateAttribute
 	public int getVisibleDays()
 	{
 		return getTimetableWidget().getDays();
+	}
+
+	/***************************************
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void initWidget(UserInterfaceContext rContext, StyleData rStyle)
+	{
+		super.initWidget(rContext, rStyle);
+
+		final TimetableWidget rWidget   = getTimetableWidget();
+		CalendarSettings	  rSettings = rWidget.getSettings();
+
+		CalendarFormat.INSTANCE.setFirstDayOfWeek(1);
+		CalendarFormat.INSTANCE.setAm("");
+		CalendarFormat.INSTANCE.setPm("");
+		rSettings.setShowWeekNumbers(true);
+		rSettings.setTimeBlockClickNumber(Click.Double);
+		rWidget.setSettings(rSettings);
+		rWidget.addDateRequestHandler(new DateRequestHandler<Date>()
+			{
+				@Override
+				public void onDateRequested(DateRequestEvent<Date> rEvent)
+				{
+					rWidget.setView(CalendarViews.DAY, 1);
+					rWidget.setDate(rEvent.getTarget());
+				}
+			});
 	}
 
 	/***************************************
@@ -402,6 +413,27 @@ public class Timetable extends Component implements DateAttribute
 	}
 
 	//~ Inner Classes ----------------------------------------------------------
+
+	/********************************************************************
+	 * Widget factory for this component.
+	 *
+	 * @author eso
+	 */
+	public static class TimetableWidgetFactory implements WidgetFactory<Widget>
+	{
+		//~ Methods ------------------------------------------------------------
+
+		/***************************************
+		 * {@inheritDoc}
+		 */
+		@Override
+		public Widget createWidget(
+			Component rComponent,
+			StyleData			 rStyle)
+		{
+			return new TimetableWidget();
+		}
+	}
 
 	/********************************************************************
 	 * An appointment subclass that also contains the original event properties.
