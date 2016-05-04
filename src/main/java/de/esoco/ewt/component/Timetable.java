@@ -17,7 +17,6 @@
 package de.esoco.ewt.component;
 
 import de.esoco.ewt.EWT;
-import de.esoco.ewt.UserInterfaceContext;
 import de.esoco.ewt.event.EventType;
 import de.esoco.ewt.impl.gwt.WidgetFactory;
 import de.esoco.ewt.style.StyleData;
@@ -90,8 +89,8 @@ public class Timetable extends Component implements DateAttribute
 	static
 	{
 		EWT.registerWidgetFactory(Timetable.class,
-										   new TimetableWidgetFactory(),
-										   false);
+								  new TimetableWidgetFactory(),
+								  false);
 	}
 
 	//~ Methods ----------------------------------------------------------------
@@ -198,9 +197,9 @@ public class Timetable extends Component implements DateAttribute
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initWidget(UserInterfaceContext rContext, StyleData rStyle)
+	public void initWidget(Container rParent, StyleData rStyle)
 	{
-		super.initWidget(rContext, rStyle);
+		super.initWidget(rParent, rStyle);
 
 		final TimetableWidget rWidget   = getTimetableWidget();
 		CalendarSettings	  rSettings = rWidget.getSettings();
@@ -427,9 +426,7 @@ public class Timetable extends Component implements DateAttribute
 		 * {@inheritDoc}
 		 */
 		@Override
-		public Widget createWidget(
-			Component rComponent,
-			StyleData			 rStyle)
+		public Widget createWidget(Component rComponent, StyleData rStyle)
 		{
 			return new TimetableWidget();
 		}
