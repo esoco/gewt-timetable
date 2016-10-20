@@ -1,24 +1,27 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
-    }
+    repositories { jcenter() }
+    dependencies { classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7' }
 }
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven'
+
+buildscript {
+    repositories { jcenter() }
+    dependencies { classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6' }
+}
+apply plugin: 'gwt-base'
 
 apply plugin: 'java'
-apply plugin: 'gwt-base'
 apply plugin: 'osgi'
 
-project.version = "1.0.0"
+project.group   = 'de.esoco'
+project.version = '1.0.0'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 repositories {
     jcenter()
-	flatDir { dirs project.getProjectDir().toString() + '/lib' }
 }
 
 dependencies
@@ -33,15 +36,8 @@ dependencies
 	}
 
 	compile 'com.allen-sauer.gwt.dnd:gwt-dnd:3.3.4'
-	compile 'com.bradrydzewski:gwt-cal:0.9.4'
+	compile 'de.esoco.gwt-cal:gwt-cal:0.9.5'
     testCompile 'junit:junit:4.+'
-}
-
-eclipse {
-	jdt { 
-		sourceCompatibility = "1.7"
-		targetCompatibility = "1.7"
-	}
 }
 
 gwt {
@@ -49,24 +45,36 @@ gwt {
     modules 'de.esoco.GewtTimetable'
 }
 
-jar { from sourceSets.main.allSource }
-
-task binaryJar(type: Jar, dependsOn: classes) {
-    classifier = 'bin'
-    from sourceSets.main.output
-}
-
 task sourceJar(type: Jar, dependsOn: classes) {
-    classifier = 'src'
+    classifier = 'sources'
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'doc'
+    classifier = 'javadoc'
     from javadoc.destinationDir
 }
 
 artifacts {
-    archives binaryJar
     archives sourceJar
+    archives javadocJar
+}
+
+bintray {
+	user = project.hasProperty('bintrayUser') ? 
+				project.property('bintrayUser') : 
+				System.getenv('BINTRAY_USER')
+	key = project.hasProperty('bintrayApiKey') ? 
+				project.property('bintrayApiKey') : 
+				System.getenv('BINTRAY_API_KEY')
+    configurations = ['archives']
+    publish = true
+
+	pkg {
+		repo = 'sdack'
+		name = project.name
+		version {
+			name = project.version
+	    }
+    }
 }
