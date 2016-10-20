@@ -1,4 +1,4 @@
-rootProject.name = "gewt-chart"
+rootProject.name = "gewt-timetable"
 
 def baseProjects = [':esoco-common',':gewt']
 
