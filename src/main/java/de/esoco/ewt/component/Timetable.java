@@ -1,22 +1,18 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// gewt-timetable source file
-// Copyright (c) 2016 Elmar Sonnenschein / esoco GmbH
-// Last Change: 16.10.2016 by eso
+// This file is a part of the 'gewt-timetable' project.
+// Copyright 2016 Elmar Sonnenschein, esoco GmbH, Flensburg, Germany
 //
-// gewt-timetable is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published
-// by the Free Software Foundation; either version 3 of the License,
-// or (at your option) any later version.
+// Licensed under the Apache License, Version 3.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-// gewt-timetable is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
+//	  http://www.apache.org/licenses/LICENSE-3.0
 //
-// You should have received a copy of the GNU General Public License along
-// with gewt-timetable; if not, write to the Free Software Foundation, Inc.,
-// 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA or use the
-// contact information on the FSF website http://www.fsf.org
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 package de.esoco.ewt.component;
 
@@ -188,7 +184,7 @@ public class Timetable extends Component implements DateAttribute
 
 	/***************************************
 	 * Returns the number of days that are displayed if the display type is
-	 * {@link TimetableStyle#DAYS}.
+	 * {@link TimetableStyle#DAY}.
 	 *
 	 * @return The number of visible days
 	 */
@@ -332,7 +328,7 @@ public class Timetable extends Component implements DateAttribute
 
 	/***************************************
 	 * Sets the number of days that are displayed if the display type is {@link
-	 * TimetableStyle#DAYS}.
+	 * TimetableStyle#DAY}.
 	 *
 	 * @param nDays The number of visible days
 	 */
