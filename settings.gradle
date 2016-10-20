@@ -1,8 +1,8 @@
-rootProject.name = "gewt-timetable"
+rootProject.name = "gewt-chart"
 
-include ':esoco-common'
-project(':esoco-common').projectDir = new File('../esoco-common')
+def baseProjects = [':esoco-common',':gewt']
 
-include ':gewt'
-project(':gewt').projectDir = new File('../gewt')
-
+baseProjects.each { projectName ->
+	include projectName
+	project(projectName).projectDir = new File("../${projectName.substring(1)}")
+}
