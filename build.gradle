@@ -36,7 +36,7 @@ dependencies
 	}
 
 	compile 'com.allen-sauer.gwt.dnd:gwt-dnd:3.3.4'
-	compile 'de.esoco.gwt-cal:gwt-cal:0.9.5'
+	compile 'de.esoco.gwt-cal:gwt-cal:0.9.4'
     testCompile 'junit:junit:4.+'
 }
 
@@ -44,6 +44,9 @@ gwt {
     gwtVersion='2.7.0'
     modules 'de.esoco.GewtTimetable'
 }
+
+// sources are need for the GWT compiler
+jar { from sourceSets.main.allSource }
 
 task sourceJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
