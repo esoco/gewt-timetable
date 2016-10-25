@@ -4,5 +4,5 @@ def baseProjects = [':esoco-common',':gewt']
 
 baseProjects.each { projectName ->
 	include projectName
-	project(projectName).projectDir = new File("../${projectName.substring(1)}")
+	project(projectName).projectDir = new File("../../sdack/${projectName.substring(1)}")
 }
