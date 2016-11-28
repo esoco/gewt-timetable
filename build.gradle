@@ -32,7 +32,7 @@ dependencies
 	}
 	else
 	{
-		compile 'de.esoco:gewt:1.+'
+		compile 'de.esoco:gewt:1.0.+'
 	}
 
 	compile 'com.allen-sauer.gwt.dnd:gwt-dnd:3.3.4'
