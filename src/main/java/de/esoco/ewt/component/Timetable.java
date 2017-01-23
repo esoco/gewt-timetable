@@ -1,7 +1,7 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // gewt-timetable source file
-// Copyright (c) 2016 Elmar Sonnenschein / esoco GmbH
-// Last Change: 03.11.2016 by eso
+// Copyright (c) 2017 Elmar Sonnenschein / esoco GmbH
+// Last Change: 23.01.2017 by eso
 //
 // gewt-timetable is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -61,6 +61,7 @@ import com.google.gwt.event.logical.shared.OpenEvent;
 import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -653,23 +654,46 @@ public class Timetable extends Component implements DateAttribute
 
 		/***************************************
 		 * {@inheritDoc}
+		 *
+		 * @return
 		 */
 		@Override
-		protected void initEventDispatching(
+		protected HandlerRegistration initEventDispatching(
 			Widget    rWidget,
 			EventType eEventType)
 		{
-			super.initEventDispatching(rWidget, eEventType);
-
 			TimetableWidget rTimetableWidget = getTimetableWidget();
 
-			rTimetableWidget.addCreateHandler(this);
-			rTimetableWidget.addDeleteHandler(this);
-			rTimetableWidget.addMouseOverHandler(this);
-			rTimetableWidget.addOpenHandler(this);
-			rTimetableWidget.addSelectionHandler(this);
-			rTimetableWidget.addTimeBlockClickHandler(this);
-			rTimetableWidget.addUpdateHandler(this);
+			if (eEventType == EventType.ACTION)
+			{
+				rTimetableWidget.addTimeBlockClickHandler(this);
+
+				return rTimetableWidget.addOpenHandler(this);
+			}
+			else if (eEventType == EventType.ELEMENT_CREATED)
+			{
+				return rTimetableWidget.addCreateHandler(this);
+			}
+			else if (eEventType == EventType.ELEMENT_DELETED)
+			{
+				return rTimetableWidget.addDeleteHandler(this);
+			}
+			else if (eEventType == EventType.POINTER_HOVER)
+			{
+				return rTimetableWidget.addMouseOverHandler(this);
+			}
+			else if (eEventType == EventType.SELECTION)
+			{
+				return rTimetableWidget.addSelectionHandler(this);
+			}
+			else if (eEventType == EventType.ELEMENT_UPDATED)
+			{
+				return rTimetableWidget.addUpdateHandler(this);
+			}
+			else
+			{
+				return super.initEventDispatching(rWidget, eEventType);
+			}
 		}
 	}
 }
