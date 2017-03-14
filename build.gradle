@@ -34,7 +34,7 @@ dependencies
 }
 
 gwt {
-    gwtVersion='2.7.0'
+    gwtVersion='2.8.0'
     modules 'de.esoco.GewtTimetable'
 }
 
