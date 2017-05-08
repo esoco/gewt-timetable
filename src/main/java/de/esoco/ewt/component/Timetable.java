@@ -1,7 +1,7 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // gewt-timetable source file
 // Copyright (c) 2017 Elmar Sonnenschein / esoco GmbH
-// Last Change: 23.01.2017 by eso
+// Last Change: 08.05.2017 by eso
 //
 // gewt-timetable is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -654,8 +654,6 @@ public class Timetable extends Component implements DateAttribute
 
 		/***************************************
 		 * {@inheritDoc}
-		 *
-		 * @return
 		 */
 		@Override
 		protected HandlerRegistration initEventDispatching(
