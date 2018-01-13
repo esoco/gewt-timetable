@@ -9,7 +9,9 @@ git:
   depth: 3
 
 install:
-  - pushd .. 
+  - pushd ../.. 
+  - mkdir sdack
+  - cd sdack
   - git clone -b ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} --depth 3 https://github.com/esoco/esoco-common
   - git clone -b ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} --depth 3 https://github.com/esoco/gewt
   - popd
